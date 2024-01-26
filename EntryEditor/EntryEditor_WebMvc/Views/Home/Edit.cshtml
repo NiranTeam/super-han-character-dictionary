@@ -1,0 +1,105 @@
+﻿@model EntryEditor_WebMvc.Models.HanCharacterModel
+
+<form asp-action="Edit" asp-route-literal="@Model.Literal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card">
+        <div class="card-header">
+            <p>Basic information</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Literal" class="control-label"></label>
+                <input asp-for="Literal" class="form-control" />
+                <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12">
+                        Add
+                    </div>
+                </div>
+                <div class="row">
+                    @for (int i = 0; i < @Model.Radicals.Count; i++)
+                    {
+                        <div class="col-3">
+                            @Html.LabelFor(x => x.Radicals[i])
+                            @Html.TextBoxFor(x => x.Radicals[i], new { @class = "form-control" })
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="StrokeCount" class="control-label"></label>
+                <input asp-for="StrokeCount" class="form-control" />
+                <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>Japanese</p>
+        </div>
+        <div class="card-body">
+            @* <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>Korean</p>
+        </div>
+        <div class="card-body">
+            @* <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>Vietnamese</p>
+        </div>
+        <div class="card-body">
+            @*  <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-5 bg-info">
+        <div class="card-body">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
