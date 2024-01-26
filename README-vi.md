@@ -15,26 +15,26 @@ Dự án nhằm cung cấp một nguồn thông tin toàn diện và dễ tiếp
 - Bộ thủ
 - Lục thư: 6 cách tạo ra chữ Hán (Tượng hình, Chỉ sự, Hội ý, Chuyển chú, Giả tá, Hình thanh/Hài thanh)
 - Tự hình
- + Kim văn
- + Triện văn
- + Lệ thư
- + Khải thư
+	+ Kim văn
+	+ Triện văn
+	+ Lệ thư
+	+ Khải thư
 - Biến thể
- + Dị thể
- + Giản thể (简体汉字, phiên âm Hán-Việt: Giản thể Hán tự)
- + Chữ kiểu mới (Shinjitai, 新字体, phiên âm Hán-Việt: Tân tự thể)
+	+ Dị thể
+	+ Giản thể (简体汉字, phiên âm Hán-Việt: Giản thể Hán tự)
+ 	+ Chữ kiểu mới (Shinjitai, 新字体, phiên âm Hán-Việt: Tân tự thể)
 - Chữ Hán dùng trong tiếng Nhật (Kanji)
- + Cấp độ JLPT
- + Cấp độ Kanken
- + Jōyō kanji (常用漢字, phiên âm Hán-Việt:Thường dụng Hán tự): chữ Hán thường dùng
- + On'yomi
- + Kun'yomi
+	+ Cấp độ JLPT
+	+ Cấp độ Kanken
+	+ Jōyō kanji (常用漢字, phiên âm Hán-Việt:Thường dụng Hán tự): chữ Hán thường dùng
+	+ On'yomi
+ 	+ Kun'yomi
 - Chữ Hán dùng trong tiếng Hàn (Hanja)
- + Âm Hán-Triều
+	+ Âm Hán-Triều
 - Chữ Hán dùng trong tiếng Việt (Chữ Hán, Hán tự)
- + Phiên âm Hán-Việt
- + Âm Nôm
- + Từ ghép
+	+ Phiên âm Hán-Việt
+	+ Âm Nôm
+	+ Từ ghép
 
 ## Cách Đóng Góp
 
