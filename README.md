@@ -1,5 +1,6 @@
-# super-han-character-dictionary
+﻿# super-han-character-dictionary
 
+[Vietnamese](README-vi.md), [Japanese](README-ja.md), [Korean](README-ko.md)
 
 
 
