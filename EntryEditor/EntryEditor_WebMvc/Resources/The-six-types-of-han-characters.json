@@ -1,0 +1,50 @@
+﻿[
+  {
+    "type_name": "ideogram",
+    "english": "ideogram",
+    "vietnamese": "chỉ sự 指事",
+    "japanese": "指事 (しじ, shiji)",
+    "korean": "지사 (指事, jisa)",
+    "chinese": "指事 (zhǐshì)"
+  },
+  {
+    "type_name": "pictogram",
+    "english": "pictogram",
+    "vietnamese": "tượng hình 象形",
+    "japanese": "象形 (しょうけい, shōkei)",
+    "korean": "상형 (象形, sanghyeong)",
+    "chinese": "象形 (xiàngxíng)"
+  },
+  {
+    "type_name": "phono-semantic compound",
+    "english": "phono-semantic compound",
+    "vietnamese": "hình thanh 形聲",
+    "japanese": "形声 (けいせい, keisei)",
+    "korean": "형성 (形聲, hyeongseong)",
+    "chinese": "形聲／形声 (xíngshēng)"
+  },
+  {
+    "type_name": "compound ideograph",
+    "english": "compound ideograph",
+    "vietnamese": "hội ý 會意,",
+    "japanese": "会意 (かいい, kaī)",
+    "korean": "회의 (會意, hoe'ui)",
+    "chinese": "會意／会意 (huìyì)"
+  },
+  {
+    "type_name": "derivative cognate",
+    "english": "derivative cognate",
+    "vietnamese": "chuyển chú 轉注",
+    "japanese": "転注 (てんちゅう, tenchū)",
+    "korean": "전주 (轉注, jeonju)",
+    "chinese": "轉注／转注 (zhuǎnzhù)"
+  },
+  {
+    "type_name": "phonetic loan",
+    "english": "phonetic loan ",
+    "vietnamese": "giả tá 假借",
+    "japanese": "仮借 (かしゃ, kasha)",
+    "korean": "가차 (假借, gacha)",
+    "chinese": "假借 (jiǎjiè)"
+  }
+]

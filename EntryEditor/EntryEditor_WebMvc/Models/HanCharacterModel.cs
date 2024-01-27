@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.Build.Framework;
 
 namespace EntryEditor_WebMvc.Models;
 
@@ -10,6 +12,9 @@ public class HanCharacterModel
 
     [BsonElement("literal")]
     public string Literal { get; set; } = default!;
+
+    [BsonElement("traditional_classification")]
+    public TraditionalClassificationModel TraditionalClassification { get; set; } = default!;
 
     [BsonElement("radicals")]
     public List<string> Radicals { get; set; } = new List<string>();
@@ -30,11 +35,26 @@ public class Kangxi
 
 public class Kanji
 {
+    [BsonElement("gradles")]
     public int Gradles { get; set; }
+
+    [BsonElement("jlpt_level")]
     public int JlptLevel { get; set; }
+
+    [BsonElement("kanken_level")]
     public int KankenLevel { get; set; }
+
+    [BsonElement("is_jouyou_kanji")]
     public bool IsJouyouKanji { get; set; }
+
+    [BsonElement("is_jinmeiyou_kanji")]
     public bool IsJinmeiyouKanji { get; set; }
+
+    [BsonElement("readings_on")]
+    public List<string> Readings_On { get; set; } = new List<string>();
+
+    [BsonElement("readings_kun")]
+    public List<string> Readings_Kun { get; set; } = new List<string>();
 }
 
 public class Hanja

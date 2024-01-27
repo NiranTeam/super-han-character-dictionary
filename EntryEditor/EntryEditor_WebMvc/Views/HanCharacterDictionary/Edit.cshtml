@@ -1,0 +1,127 @@
+﻿@model EntryEditor_WebMvc.Models.HanCharacterViewModel
+
+<form asp-action="Edit" asp-route-literal="@Model.HanCharacter.Literal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card">
+        <div class="card-header">
+            <p>Basic information</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="HanCharacter.Literal" class="control-label mb-1"></label>
+                <input asp-for="HanCharacter.Literal" class="form-control" />
+                <span asp-validation-for="HanCharacter.Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="HanCharacter.TraditionalClassification" class="control-label mb-1"></label>
+                <select asp-for="HanCharacter.TraditionalClassification" asp-items="@((SelectList)ViewData["TraditionalClassificationSelectList"]!)" class="form-control"></select>
+                <span asp-validation-for="HanCharacter.TraditionalClassification" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group justify-content-start" style="display:flex;">
+                            <label asp-for="IncreaseRadicalTextBox" formaction=""></label>
+                            <input type="checkbox" asp-for="IncreaseRadicalTextBox" class="mx-3" />
+                            <label asp-for="IncreaseRadicalTextBoxValue"></label>
+                            <input asp-for="IncreaseRadicalTextBoxValue" class="form-control mx-3" style="width:150px" />
+                            <button type="submit" class="btn btn-primary mx-5">Apply</button>
+                        </div>
+                        <div class="row">
+                            @for (int i = 0; i < @Model.HanCharacter.Radicals.Count; i++)
+                            {
+                                <div class="col-3">
+                                    @Html.LabelFor(x => x.HanCharacter.Radicals[i], null, new { @class = "form-label" })
+                                    @Html.TextBoxFor(x => x.HanCharacter.Radicals[i], new { @class = "form-control" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="HanCharacter.StrokeCount" class="control-label"></label>
+                <input asp-for="HanCharacter.StrokeCount" class="form-control" />
+                <span asp-validation-for="HanCharacter.StrokeCount" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>Kanji</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="HanCharacter.Kanji.Gradles" class="control-label"></label>
+                <input asp-for="HanCharacter.Kanji.Gradles" class="form-control" />
+                <span asp-validation-for="HanCharacter.Kanji.Gradles" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HanCharacter.Kanji.JlptLevel" class="control-label"></label>
+                <input asp-for="HanCharacter.Kanji.JlptLevel" class="form-control" />
+                <span asp-validation-for="HanCharacter.Kanji.JlptLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HanCharacter.Kanji.KankenLevel" class="control-label"></label>
+                <input asp-for="HanCharacter.Kanji.KankenLevel" class="form-control" />
+                <span asp-validation-for="HanCharacter.Kanji.KankenLevel" class="text-danger"></span>
+            </div>
+
+           @*  <div class="form-group">
+                <label asp-for="Kanji.Readings_On" class="control-label"></label>
+                <input asp-for="Kanji.Readings_On" class="form-control" />
+                <span asp-validation-for="Kanji.Readings_On" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>Hanja</p>
+        </div>
+        <div class="card-body">
+            @* <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <p>HanTu</p>
+        </div>
+        <div class="card-body">
+            @*  <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-5 bg-info">
+        <div class="card-body">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+@* @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@
