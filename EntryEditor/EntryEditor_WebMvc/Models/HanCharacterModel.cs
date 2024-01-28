@@ -22,15 +22,16 @@ public class HanCharacterModel
     [BsonElement("stroke_count")]
     public int StrokeCount { get; set; }
 
-    public Kangxi Kangxi { get; set; } = default!;
-    public Kanji Kanji { get; set; } = default!;
-    public Hanja Hanja { get; set; } = default!;
-    public HanTu HanTu { get; set; } = default!;
+    public Kangxi Kangxi { get; set; } = new Kangxi();
+    public Kanji Kanji { get; set; } = new Kanji();
+    public Hanja Hanja { get; set; } = new Hanja();
+    public HanTu HanTu { get; set; } = new HanTu();
 }
 
 public class Kangxi
 {
-
+    [BsonElement("pinyin")]
+    public string Pinyin { get; set; } = default!;
 }
 
 public class Kanji
@@ -51,13 +52,51 @@ public class Kanji
     public bool IsJinmeiyouKanji { get; set; }
 
     [BsonElement("readings_on")]
-    public List<string> Readings_On { get; set; } = new List<string>();
+    public List<KanjiReading> Readings_On { get; set; } = new List<KanjiReading>();
 
     [BsonElement("readings_kun")]
-    public List<string> Readings_Kun { get; set; } = new List<string>();
+    public List<KanjiReading> Readings_Kun { get; set; } = new List<KanjiReading>();
+
+    [BsonElement("readings_nanori")]
+    public List<KanjiReading> KanjiReadings_Nanori { get; set; } = new List<KanjiReading>();
+
+    [BsonElement("meanings")]
+    public List<KanjiMeaning> Meanings { get; set; } = new List<KanjiMeaning>();
+}
+
+public class KanjiReading
+{
+    [BsonElement("kana")]
+    public string Kana { get; set; } = default!;
+
+    [BsonElement("romaji")]
+    public string Romaji { get; set; } = default!;
+}
+
+public class KanjiMeaning
+{
+
 }
 
 public class Hanja
+{
+    [BsonElement("readings")]
+    public List<HanjaReading> Readings { get; set; } = new List<HanjaReading>();
+
+    [BsonElement("meanings")]
+    public List<HanjaMeaning> Meanings { get; set; } = new List<HanjaMeaning>();
+}
+
+public class HanjaReading
+{
+    [BsonElement("hangul")]
+    public string Hangul { get; set; } = default!;
+
+    [BsonElement("romaja")]
+    public string Romaja { get; set; } = default!;
+}
+
+public class HanjaMeaning
 {
 
 }

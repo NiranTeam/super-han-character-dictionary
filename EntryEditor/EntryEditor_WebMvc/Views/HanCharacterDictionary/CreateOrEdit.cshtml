@@ -1,0 +1,227 @@
+﻿@model EntryEditor_WebMvc.Models.HanCharacterViewModel
+
+<form asp-action="@Model.Action" asp-route-literal="@Model.HanCharacter.Literal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card border border-primary border-3">
+        <div class="card-header bg-primary text-white">
+            <p class="card-title m-0 fw-bold">Basic information</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="HanCharacter.Literal" class="control-label mb-1"></label>
+                <input asp-for="HanCharacter.Literal" class="form-control" />
+                <span asp-validation-for="HanCharacter.Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="HanCharacter.TraditionalClassification" class="control-label mb-1"></label>
+                <select asp-for="HanCharacter.TraditionalClassification" asp-items="@((SelectList)ViewData["TraditionalClassificationSelectList"]!)" class="form-control"></select>
+                <span asp-validation-for="HanCharacter.TraditionalClassification" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-white">
+                        <p class="card-title m-0 fw-bold">Radicals</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group justify-content-start" style="display:flex;">
+                            <label asp-for="IncreaseRadicalTextBoxValue"></label>
+                            <input asp-for="IncreaseRadicalTextBoxValue" class="form-control mx-3" style="width:150px" />
+                            <button type="submit" class="btn btn-warning mx-5">Apply</button>
+                        </div>
+                        <div class="row justify-content-center">
+                            @for (int i = 0; i < @Model.HanCharacter.Radicals.Count; i++)
+                            {
+                                <div class="col-3">
+                                    @Html.LabelFor(x => x.HanCharacter.Radicals[i], null, new { @class = "form-label" })
+                                    @Html.TextBoxFor(x => x.HanCharacter.Radicals[i], new { @class = "form-control" })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="HanCharacter.StrokeCount" class="control-label mb-1"></label>
+                <input asp-for="HanCharacter.StrokeCount" class="form-control" />
+                <span asp-validation-for="HanCharacter.StrokeCount" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border border-primary border-3 mt-4">
+        <div class="card-header bg-primary text-white">
+            <p class="card-title m-0 fw-bold">Kanji</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="HanCharacter.Kanji.Gradles" class="control-label mb-1"></label>
+                            <input asp-for="HanCharacter.Kanji.Gradles" class="form-control" />
+                            <span asp-validation-for="HanCharacter.Kanji.Gradles" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="HanCharacter.Kanji.JlptLevel" class="control-label mb-1"></label>
+                            <input asp-for="HanCharacter.Kanji.JlptLevel" class="form-control" />
+                            <span asp-validation-for="HanCharacter.Kanji.JlptLevel" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="HanCharacter.Kanji.KankenLevel" class="control-label mb-1"></label>
+                            <input asp-for="HanCharacter.Kanji.KankenLevel" class="form-control" />
+                            <span asp-validation-for="HanCharacter.Kanji.KankenLevel" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-white">
+                        <p class="card-title m-0 fw-bold">On'yomi Readings</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group justify-content-start" style="display:flex;">
+                            <label asp-for="IncreaseOnReadingTextBoxValue"></label>
+                            <input asp-for="IncreaseOnReadingTextBoxValue" class="form-control mx-3" style="width:150px" />
+                            <button type="submit" class="btn btn-warning mx-5">Apply</button>
+                        </div>
+                        <div class="row justify-content-center">
+                            @for (int i = 0; i < @Model.HanCharacter.Kanji.Readings_On.Count; i++)
+                            {
+                                <div class="col-3 border border-info rounded m-2 p-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Kanji.Readings_On[i].Kana, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Kanji.Readings_On[i].Kana, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Kanji.Readings_On[i].Romaji, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Kanji.Readings_On[i].Romaji, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-white">
+                        <p class="card-title m-0 fw-bold">Kun'yomi Readings</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group justify-content-start" style="display:flex;">
+                            <label asp-for="IncreaseKunReadingTextBoxValue"></label>
+                            <input asp-for="IncreaseKunReadingTextBoxValue" class="form-control mx-3" style="width:150px" />
+                            <button type="submit" class="btn btn-warning mx-5">Apply</button>
+                        </div>
+                        <div class="row justify-content-center">
+                            @for (int i = 0; i < @Model.HanCharacter.Kanji.Readings_Kun.Count; i++)
+                            {
+                                <div class="col-3 border border-info rounded m-2 p-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Kanji.Readings_Kun[i].Kana, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Kanji.Readings_Kun[i].Kana, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Kanji.Readings_Kun[i].Romaji, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Kanji.Readings_Kun[i].Romaji, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*  <div class="form-group">
+            <label asp-for="Kanji.Readings_On" class="control-label"></label>
+            <input asp-for="Kanji.Readings_On" class="form-control" />
+            <span asp-validation-for="Kanji.Readings_On" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card border border-primary border-3 mt-4">
+        <div class="card-header bg-primary text-white">
+            <p class="card-title m-0 fw-bold">Hanja</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group mt-4">
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-white">
+                        <p class="card-title m-0 fw-bold">Readings</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group justify-content-start" style="display:flex;">
+                            <label asp-for="IncreaseHanjaReadingTextBoxValue"></label>
+                            <input asp-for="IncreaseHanjaReadingTextBoxValue" class="form-control mx-3" style="width:150px" />
+                            <button type="submit" class="btn btn-warning mx-5">Apply</button>
+                        </div>
+                        <div class="row justify-content-center">
+                            @for (int i = 0; i < @Model.HanCharacter.Hanja.Readings.Count; i++)
+                            {
+                                <div class="col-3 border border-info rounded m-2 p-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Hanja.Readings[i].Hangul, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Hanja.Readings[i].Hangul, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.HanCharacter.Hanja.Readings[i].Romaja, null, new { @class = "form-label" })
+                                        @Html.TextBoxFor(x => x.HanCharacter.Hanja.Readings[i].Romaja, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card border border-primary border-3 mt-4">
+        <div class="card-header bg-primary text-white">
+            <p class="card-title m-0 fw-bold">Hán Tự</p>
+        </div>
+        <div class="card-body">
+            @*  <div class="form-group">
+            <label asp-for="Literal" class="control-label"></label>
+            <input asp-for="Literal" class="form-control" />
+            <span asp-validation-for="Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="StrokeCount" class="control-label"></label>
+            <input asp-for="StrokeCount" class="form-control" />
+            <span asp-validation-for="StrokeCount" class="text-danger"></span>
+            </div> *@
+        </div>
+    </div>
+
+    <div class="card mt-5 bg-info">
+        <div class="card-body">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+@* @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@

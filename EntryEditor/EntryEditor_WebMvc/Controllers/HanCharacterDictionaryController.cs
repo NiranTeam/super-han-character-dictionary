@@ -32,25 +32,88 @@ public class HanCharacterDictionaryController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        return View(new HanCharacterModel());
+        string jsonString = Encoding.UTF8.GetString(global::EntryEditor_WebMvc.MainResource.The_six_types_of_han_characters)
+            .TrimStart('\uFEFF', '\u200B');
+        List<TraditionalClassificationModel> classificationModels = System.Text.Json.JsonSerializer
+           .Deserialize<List<TraditionalClassificationModel>>(jsonString)!;
+
+        ViewData["TraditionalClassificationSelectList"] = new SelectList(
+            classificationModels,
+            nameof(TraditionalClassificationModel.TypeName),
+            nameof(TraditionalClassificationModel.English)
+        );
+
+        return View("CreateOrEdit", new HanCharacterViewModel() { Action = nameof(Create) });
     }
 
     [Route("create")]
     [HttpPost]
-    public async Task<IActionResult> Create(HanCharacterModel model)
+    public async Task<IActionResult> Create(HanCharacterViewModel viewModel)
     {
-        HanCharacterModel hanCharacterModel = await _collection.AsQueryable()
-            .SingleOrDefaultAsync(x => x.Literal == model.Literal);
+        bool isExists = await _collection.AsQueryable()
+            .AnyAsync(x => x.Literal == viewModel.HanCharacter.Literal);
 
-        if (hanCharacterModel is not null)
-            return View(nameof(Index));
+        if (isExists)
+            return RedirectToAction(nameof(Index));
 
-        if (!ModelState.IsValid)
-            return View(model);
+        string jsonString = Encoding.UTF8.GetString(global::EntryEditor_WebMvc.MainResource.The_six_types_of_han_characters)
+            .TrimStart('\uFEFF', '\u200B');
+        List<TraditionalClassificationModel> classificationModels = System.Text.Json.JsonSerializer
+           .Deserialize<List<TraditionalClassificationModel>>(jsonString)!;
 
-        await _collection.InsertOneAsync(model);
+        ViewData["TraditionalClassificationSelectList"] = new SelectList(
+            classificationModels,
+            nameof(TraditionalClassificationModel.TypeName),
+            nameof(TraditionalClassificationModel.English),
+            viewModel.HanCharacter.TraditionalClassification
+        );
 
-        return View(model);
+        if (viewModel.IncreaseRadicalTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseRadicalTextBoxValue; i++)
+                viewModel.HanCharacter.Radicals.Add(string.Empty);
+
+            viewModel.IncreaseRadicalTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        if (viewModel.IncreaseOnReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseOnReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Kanji.Readings_On.Add(new KanjiReading { });
+
+            viewModel.IncreaseOnReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        if (viewModel.IncreaseKunReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseKunReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Kanji.Readings_Kun.Add(new KanjiReading { });
+
+            viewModel.IncreaseKunReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        if (viewModel.IncreaseHanjaReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseHanjaReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Hanja.Readings.Add(new HanjaReading { });
+
+            viewModel.IncreaseHanjaReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        //if (!ModelState.IsValid)
+        //    return View(model);
+
+        await _collection.InsertOneAsync(viewModel.HanCharacter);
+
+        return View("CreateOrEdit", viewModel);
     }
 
     [Route("edit/{literal}")]
@@ -63,7 +126,7 @@ public class HanCharacterDictionaryController : Controller
         if (hanCharacterModel is null)
             return View(nameof(Index));
 
-        string jsonString = Encoding.UTF8.GetString(global::EntryEditor_WebMvc.MainResource.The_six_types_of_han_characters)
+        string jsonString = Encoding.UTF8.GetString(MainResource.The_six_types_of_han_characters)
             .TrimStart('\uFEFF', '\u200B');
          List<TraditionalClassificationModel> classificationModels = System.Text.Json.JsonSerializer
             .Deserialize<List<TraditionalClassificationModel>>(jsonString)!;
@@ -75,7 +138,7 @@ public class HanCharacterDictionaryController : Controller
             hanCharacterModel.TraditionalClassification
         );
 
-        return View(new HanCharacterViewModel { HanCharacter = hanCharacterModel });
+        return View("CreateOrEdit", new HanCharacterViewModel { Action = nameof(Edit), HanCharacter = hanCharacterModel });
     }
 
     [Route("edit/{literal}")]
@@ -94,21 +157,53 @@ public class HanCharacterDictionaryController : Controller
             viewModel.HanCharacter.TraditionalClassification
         );
 
-        if (viewModel.IncreaseRadicalTextBox)
+        if (viewModel.IncreaseRadicalTextBoxValue > 0)
         {
             for(int i = 0; i < viewModel.IncreaseRadicalTextBoxValue; i++)
                 viewModel.HanCharacter.Radicals.Add(string.Empty);
 
-            return View(viewModel);
+            viewModel.IncreaseRadicalTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
         }
 
-        if (!ModelState.IsValid)
-            return View(viewModel);
+        if(viewModel.IncreaseOnReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseOnReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Kanji.Readings_On.Add(new KanjiReading { });
+
+            viewModel.IncreaseOnReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        if(viewModel.IncreaseKunReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseKunReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Kanji.Readings_Kun.Add(new KanjiReading { });
+
+            viewModel.IncreaseKunReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        if (viewModel.IncreaseHanjaReadingTextBoxValue > 0)
+        {
+            for (int i = 0; i < viewModel.IncreaseHanjaReadingTextBoxValue; i++)
+                viewModel.HanCharacter.Hanja.Readings.Add(new HanjaReading { });
+
+            viewModel.IncreaseHanjaReadingTextBoxValue = 0;
+
+            return View("CreateOrEdit", viewModel);
+        }
+
+        //if (!ModelState.IsValid)
+        //    return View("CreateOrEdit", viewModel);
 
         FilterDefinition<HanCharacterModel> filter = Builders<HanCharacterModel>.Filter.Eq(x => x.Literal, literal);
         UpdateDefinition<HanCharacterModel> update = Builders<HanCharacterModel>.Update.Set(x => x, viewModel.HanCharacter);
         await _collection.UpdateOneAsync(filter, update);
 
-        return View(viewModel);
+        return View("CreateOrEdit", viewModel);
     }
 }
