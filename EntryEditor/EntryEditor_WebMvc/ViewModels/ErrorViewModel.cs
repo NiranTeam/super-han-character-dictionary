@@ -1,4 +1,4 @@
-namespace EntryEditor_WebMvc.Models
+namespace EntryEditor_WebMvc.ViewModels
 {
     public class ErrorViewModel
     {

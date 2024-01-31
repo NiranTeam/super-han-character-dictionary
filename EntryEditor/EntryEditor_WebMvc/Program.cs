@@ -1,3 +1,4 @@
+using Kanjidic2;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddScoped<IMongoDatabase>(i =>
     MongoClient client = new MongoClient(builder.Configuration.GetConnectionString("MongoDB"));
     return client.GetDatabase("SuperHanCharacterDictionary");
 });
+
+builder.Services.AddScoped<Kanjidic2DataAccess>();
 
 var app = builder.Build();
 

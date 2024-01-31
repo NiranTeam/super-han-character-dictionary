@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Composition;
+using EntryEditor_WebMvc.Models;
 
-namespace EntryEditor_WebMvc.Models;
+namespace EntryEditor_WebMvc.ViewModels;
 public class HanCharacterViewModel
 {
     public HanCharacterModel HanCharacter { get; set; } = new HanCharacterModel();

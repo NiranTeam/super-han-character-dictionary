@@ -13,23 +13,34 @@
     </div>
 </div>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <td>Literal</td>
-            <td>Radicals</td>
-            <td>StrokeCount</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(HanCharacterModel hanCharacter in @Model)
-        {
-            <tr ondblclick="location.href='@Url.Action("Edit", new { literal = hanCharacter.Literal })'">
-                <td>@hanCharacter.Literal</td>
-                <td>@hanCharacter.Radicals.ToJson()</td>
-                <td>@hanCharacter.StrokeCount</td>
+<div class="table-responsive mt-5">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="fw-bold text-center text-white bg-secondary">
+                <td><p>Literal</p></td>
+                <td><p>TraditionalClassification</p></td>
+                <td><p>Radicals</p></td>
+                <td><p>StrokeCount</p></td>
+                <td><p>Kangxi</p></td>
+                <td style="width:50px;"><p>Kanji</p></td>
+                <td><p>Hanja</p></td>
+                <td><p>Hán tự</p></td>
             </tr>
-        }
-    </tbody>
-   
-</table>
+        </thead>
+        <tbody>
+            @foreach (HanCharacterModel hanCharacter in @Model)
+            {
+                <tr ondblclick="location.href='@Url.Action("Edit", new { literal = hanCharacter.Literal })'">
+                    <td class="text-center fw-bold text-success">@hanCharacter.Literal</td>
+                    <td>@hanCharacter.TraditionalClassification?.TypeName</td>
+                    <td class="text-truncate text-nowrap">@hanCharacter.Radicals.ToJson()</td>
+                    <td>@hanCharacter.StrokeCount</td>
+                    <td class="text-truncate text-nowrap">@hanCharacter.Kangxi.ToJson()</td>
+                    <td class="text-truncate text-nowrap">@hanCharacter.Kanji.ToJson()</td>
+                    <td class="text-truncate text-nowrap">@hanCharacter.Hanja.ToJson()</td>
+                    <td class="text-truncate text-nowrap">@hanCharacter.HanTu.ToJson()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
